@@ -248,6 +248,9 @@ public class Metadata {
         // Interrupt the artwork thread if it's running
         if(artwork != null) artwork.interrupt();
 
+        // unregistered noisyReceiver
+        noisyReceiver.setEnabled(false);
+
         // Release the media session
         session.release();
     }

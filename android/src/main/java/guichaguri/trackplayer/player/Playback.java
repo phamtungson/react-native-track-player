@@ -46,7 +46,7 @@ public abstract class Playback {
 
             if(empty) updateCurrentTrack(0, null);
         } else {
-            int index = queue.size();
+            int index = 0;
             for(int i = 0; i < queue.size(); i++) {
                 if(queue.get(i).id.equals(insertBeforeId)) break;
                 index = i;

@@ -39,6 +39,14 @@ class RNTrackPlayer: RCTEventEmitter, MediaWrapperDelegate {
           "position": time,
       ])
     }
+
+    func playerItemEnd(trackId: String?, time: TimeInterval?) {
+        guard !isTesting else { return }
+        sendEvent(withName: "playback-item-ended", body: [
+            "track": trackId,
+            "position": time,
+            ])
+    }
     
     func playbackFailed(error: Error) {
         sendEvent(withName: "playback-error", body: ["error": error.localizedDescription])
@@ -81,6 +89,7 @@ class RNTrackPlayer: RCTEventEmitter, MediaWrapperDelegate {
             "playback-state",
             "playback-error",
             "playback-track-changed",
+            "playback-item-ended",
             
             "remote-stop",
             "remote-pause",
@@ -168,6 +177,12 @@ class RNTrackPlayer: RCTEventEmitter, MediaWrapperDelegate {
         mediaWrapper.removeTracks(ids: ids)
         
         resolve(NSNull())
+    }
+
+    @objc(setRepeat:)
+    func setRepeat(isRepeat: Bool) {
+        print("Repeatting current track")
+        mediaWrapper.setRepeat(isRepeat: isRepeat)
     }
     
     @objc(skip:resolver:rejecter:)

@@ -212,12 +212,6 @@ public class ExoPlayback extends Playback implements EventListener {
 
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-        boolean isEnd = (playbackState == SimpleExoPlayer.STATE_ENDED);
-        if (isRepeatSong && isEnd) {
-            seekTo(0);
-            return;
-        }
-
         playing = playWhenReady;
         updateState(getState(playbackState));
 
@@ -226,7 +220,8 @@ public class ExoPlayback extends Playback implements EventListener {
             Utils.resolveCallback(loadCallback);
             loadCallback = null;
 
-        } else if(isEnd) {
+        } else if(playbackState == SimpleExoPlayer.STATE_ENDED) {
+
             if(hasNext()) {
                 updateCurrentTrack(currentTrack + 1, null);
             } else {

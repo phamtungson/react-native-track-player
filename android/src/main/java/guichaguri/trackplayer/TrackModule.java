@@ -368,14 +368,4 @@ public class TrackModule extends ReactContextBaseJavaModule implements ServiceCo
         });
     }
 
-    @ReactMethod
-    public void setRepeat(final boolean isRepeat) {
-        waitForConnection(new Runnable() {
-            @Override
-            public void run() {
-                binder.setRepeat(isRepeat);
-            }
-        });
-    }
-
 }

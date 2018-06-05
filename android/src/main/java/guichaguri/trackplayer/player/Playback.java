@@ -23,7 +23,7 @@ public abstract class Playback {
     protected final MediaManager manager;
     protected List<Track> queue = Collections.synchronizedList(new ArrayList<Track>());
     protected int currentTrack = -1;
-    protected boolean isRepeatSong = false;
+
     protected int prevState = PlaybackStateCompat.STATE_NONE;
 
     protected Playback(Context context, MediaManager manager) {
@@ -163,10 +163,6 @@ public abstract class Playback {
 
     public void updateData() {
         // NOOP
-    }
-
-    public void setRepeat(boolean isRepeat) {
-        isRepeatSong = isRepeat;
     }
 
     public void copyPlayback(Playback playback) {
